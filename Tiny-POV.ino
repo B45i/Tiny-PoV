@@ -44,31 +44,31 @@ int alphabets[][5] = {
 	{19, 21, 21, 25, 0}};
 
 void displayLine(int line) {
-	if (line == 16) {
+	if (line >= 16) {
 		digitalWrite(LED1, HIGH);
 		line -= 16;
 	} else {
 		digitalWrite(LED1, LOW);
 	}
-	if (line == 8) {
+	if (line >= 8) {
 		digitalWrite(LED2, HIGH);
 		line -= 8;
 	} else {
 		digitalWrite(LED2, LOW);
 	}
-	if (line == 4) {
+	if (line >= 4) {
 		digitalWrite(LED3, HIGH);
 		line -= 4;
 	} else {
 		digitalWrite(LED3, LOW);
 	}
-	if (line == 2) {
+	if (line >= 2) {
 		digitalWrite(LED4, HIGH);
 		line -= 2;
 	} else {
 		digitalWrite(LED4, LOW);
 	}
-	if (line == 1) {
+	if (line >= 1) {
 		digitalWrite(LED5, HIGH);
 		line -= 1;
 	} else {
