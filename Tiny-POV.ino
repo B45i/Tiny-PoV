@@ -1,18 +1,14 @@
 int delayTime = 2;
 int charBreak = 5;
+int ledCount = 5;
 
-int LED1 = 0;
-int LED2 = 1;
-int LED3 = 2;
-int LED4 = 3;
-int LED5 = 4;
+int leds[] = {0, 1, 2, 3, 4};
+int keys[] = {1, 2, 4, 8, 16};
 
 void setup() {
-	pinMode(LED1, OUTPUT);
-	pinMode(LED2, OUTPUT);
-	pinMode(LED3, OUTPUT);
-	pinMode(LED4, OUTPUT);
-	pinMode(LED5, OUTPUT);
+	for (int i = 0; i < ledCount; i++) {
+		pinMode(leds[i], OUTPUT);
+	}
 }
 
 int alphabets[][5] = {
@@ -44,35 +40,8 @@ int alphabets[][5] = {
 	{19, 21, 21, 25, 0}};
 
 void displayLine(int line) {
-	if (line >= 16) {
-		digitalWrite(LED1, HIGH);
-		line -= 16;
-	} else {
-		digitalWrite(LED1, LOW);
-	}
-	if (line >= 8) {
-		digitalWrite(LED2, HIGH);
-		line -= 8;
-	} else {
-		digitalWrite(LED2, LOW);
-	}
-	if (line >= 4) {
-		digitalWrite(LED3, HIGH);
-		line -= 4;
-	} else {
-		digitalWrite(LED3, LOW);
-	}
-	if (line >= 2) {
-		digitalWrite(LED4, HIGH);
-		line -= 2;
-	} else {
-		digitalWrite(LED4, LOW);
-	}
-	if (line >= 1) {
-		digitalWrite(LED5, HIGH);
-		line -= 1;
-	} else {
-		digitalWrite(LED5, LOW);
+	for (int i = 0; i < ledCount; i++) {
+		digitalWrite(leds[i], (line & keys[i]) == keys[i]);
 	}
 }
 
@@ -84,7 +53,7 @@ void displayLetter(int letter[5]) {
 }
 
 void displayString(String s) {
-	s.toUpperCase(); // todo: support lower case as well
+	s.toUpperCase(); // TODO: support lower case as well
 	for (int i = 0; i <= s.length(); i++) {
 		if (isAlpha(s[i])) { // alphabet - display normally
 			displayLetter(alphabets[(int)s[i] - 97]);
@@ -94,4 +63,6 @@ void displayString(String s) {
 	}
 }
 
-void loop() { displayString("Hello world"); }
+void loop() {
+	displayString("Hello world");
+}
