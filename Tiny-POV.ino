@@ -1,3 +1,5 @@
+#include <avr/pgmspace.h>
+
 #define DELAY_TIME 1
 #define CHAR_BREAK 2
 
@@ -8,15 +10,6 @@ void setup() {
   for (uint8_t i = 0; i < 5; i++) {
     pinMode(leds[i], OUTPUT);
   }
-
-  //    uint8_t x = 1;
-  //  while(1) {
-  //       for (uint8_t i = 0; i < 5; i++) {
-  //    digitalWrite(leds[i], x);
-  //    delay(100);
-  //  }
-  //  x = !x;
-  //  }
 }
 
 const PROGMEM uint8_t alphabets[][5] = {
@@ -56,20 +49,20 @@ void displayLine(uint8_t line) {
 
 void displayLetter(uint8_t n) {
   for (uint8_t i = 0; i < 5; i++) {
-    displayLine(alphabets[n][i]);
+    displayLine(pgm_read_word_near(alphabets[n] + i));
     delay(DELAY_TIME);
   }
   displayLine(0);
 }
 
 void displayString(char *s) {
-  for (uint8_t i = 0; i <= strlen(s); i++) {
+  for (uint8_t i = 0; i < strlen(s); i++) {
     uint8_t charCode = (uint8_t)toupper(s[i]);
-    displayLetter((uint8_t)charCode - 97);
+    displayLetter(charCode - 65);
     delay(CHAR_BREAK);
   }
 }
 
 void loop() {
-  displayString("Hello");
+  displayString("HELLO");
 }
