@@ -1,3 +1,7 @@
+// https://github.com/B45i/Tiny-PoV
+// App to calculate array values: https://pov-display-calc.vercel.app/
+// Preact app source: https://github.com/B45i/pov-display-calc
+
 #include <avr/pgmspace.h>
 
 #define DELAY_TIME 1
