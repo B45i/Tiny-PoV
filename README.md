@@ -29,7 +29,7 @@ PoV Displays are basically a bunch of blinking LEDs with some carefully placed d
 Both ATtiny85 and ATtiny13 have the same pinout.
 
 The total cost of the components for this project is under $1.
-If you are in India you can get the ATtiny Microcontroller from this [link](https://www.roboelements.com/product/attiny13-microcontroller-8-bit-atmel-avr-microcontroller/) (Cost 35rs per piece).
+If you are in India you can get the ATtiny Microcontroller from this [link](https://www.roboelements.com/product/attiny13-microcontroller-8-bit-atmel-avr-microcontroller/)
 
 ### You will be needing these components for this project
 
