@@ -38,7 +38,7 @@ If you are in India you can get the ATtiny Microcontroller from this [link](http
 -   1 x CR2032 Battery
 -   1 x CR2032 Battery holder
 -   1 x Slide Switch
--   Prototyping PCB or My Custom PCB
+-   Prototyping PCB or [My Custom PCB](https://www.pcbway.com/project/shareproject/Make_a_PoV_Display_with_ATtiny13_for__1.html)
 -   Soldering Iron
 
 ## What are PoV Displays and how do they work?
@@ -306,7 +306,7 @@ You can use a Prototyping PCB to solder the circuit.
 I've designed a PCB for this circuit.
 If you are using the PCB, then you don't have to do any wiring, just solder the components.
 
-You can order the PCBs from [here](http://todo-add-lnk-here) if you’d like to.
+You can order the PCBs from [here](https://www.pcbway.com/project/shareproject/Make_a_PoV_Display_with_ATtiny13_for__1.html) if you’d like to.
 
 or you can download the PCB files form [here](https://github.com/B45i/Tiny-PoV/tree/master/Hardware) and order them from your favourite fab house.
 
