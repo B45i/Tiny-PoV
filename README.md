@@ -48,7 +48,10 @@ If you look at a normal display the pixels are arranged in a matrix fashion.
 But in a PoV display Pixels/LEDs are arranged as an array.
 How does it display anything you may ask, that's where the Persistence of vision comes into play.
 Our eyes won't be seeing different columns of LEDs , they would see what appears to be a proper image.
-![animated pov](./images/animated.gif)
+
+<p align="center">
+   <img src="./images/animated.gif"/>
+</p>
 
 ### Setting up Arduino IDE for ATtiny13
 
@@ -78,9 +81,11 @@ Now we need to install the hardware package for ATtiny13 on Arduino IDE as the I
 
 and paste this
 
-```
+```json
 https://mcudude.github.io/MicroCore/package_MCUdude_MicroCore_index.json
 ```
+
+Then
 
 > Open **Tools -> Board -> Boards manager**.
 
