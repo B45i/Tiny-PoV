@@ -2,6 +2,10 @@
 
 ## One Dollar PoV Display with ATtiny13
 
+<p align="center">
+   <img src="./images/pov-cover.png"/>
+</p>
+
 I was browsing through AliExpress sometime back and this particular listing caught my attention.
 
 5 Pcs of ATtiny13 microcontrollers for ₹124, that's like $1.5.
