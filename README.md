@@ -1,6 +1,6 @@
 # Tiny-PoV
 
-## One Dollar PoV Display with ATtiny13
+## PoV Display with ATtiny13 for $1
 
 <p align="center">
    <img src="./images/pov-cover.png"/>
@@ -182,6 +182,112 @@ If you want to change the text change the text on this line:
 
 Based on the speed of the motor you are going to use, you might want to adjust the code, update variables `DELAY_TIME` and `CHAR_BREAK`
 
+#### Code Explanation
+
+You might be staring at the code and wondering how some random numbers can represent a character, how we can use them to blink LEDs properly.
+
+You might be familiar with using an array to represent characters and images.
+Something Like this:
+
+```cpp
+  int a[][5] = {
+    {0, 1, 1, 0, 0},
+    {1, 0, 0, 1, 0},
+    {1, 1, 1, 1, 0},
+    {1, 0, 0, 1, 0},
+    {1, 0, 0, 1, 0},
+  };
+
+  for (int i = 0; i < 5; i++) {
+    for (int j = 0; j < 5; j++) {
+      digitalWrite(LEDs[j], a[j][i]);
+    }
+  }
+```
+
+But this method will take up lots of memory, And we’ll have to use multiple loops to iterate over them.
+
+Now , that’s not a great approach for an ATtiny13 which doesn't have much processing power.
+
+##### Flagged Enums to the rescue !
+
+Instead of representing a character using a matrix, we represent it using an array.
+Our PoV display has 5 rows and 5 columns, so we will use an array of length 5.
+
+Each element in that array will tell us if we need to turn on a particular led or not.
+
+We assign a number (enum) to each LEDs, these numbers will be powers of 2.
+
+| LED   | Enum               |
+| ----- | ------------------ |
+| LED 1 | 2<sup>0</sup> = 1  |
+| LED 2 | 2<sup>1</sup> = 2  |
+| LED 3 | 2<sup>2</sup> = 4  |
+| LED 4 | 2<sup>3</sup> = 8  |
+| LED 5 | 2<sup>4</sup> = 16 |
+
+These numbers have a speciality, no matter what the combination, you will get a unique number if you add them.
+
+For Eg:
+If we add `2`, `4` and `8` we will get `14`, no other combination of these numbers will generate `14`.
+
+If an LED is off, we represent it using 0.
+
+Let's look at how we can represent the letter "A".
+
+<p align="center">
+   <img src="./images/pov-letter-a.png"/>
+</p>
+
+In the first column, we have to turn off LED1 and turn on all other ones.
+So, we can represent it using `0 (LED1 is off )+ 2 + 4 + 8 + 16 = 30`.
+
+Other elements in array will be:
+
+| Column   | Value                                    |
+| -------- | ---------------------------------------- |
+| Column 1 | 0 + 2 + 4 + 8 + 16 = 30                  |
+| Column 2 | 1 + 0 + 4 + 0 + 0 = 5                    |
+| Column 3 | 1 + 0 + 4 + 0 + 0 = 5                    |
+| Column 4 | 0 + 2 + 4 + 8 + 16 = 30                  |
+| Column 5 | 0 + 0 + 0 + 0 + 0 = 0 (All LEDs are off) |
+
+How do we turn the LEDs on and off based on these numbers?
+
+It’s simple, You do a `bitwise AND` operation with the number and the enum for the LED, if the results are enum then we need to turn on the corresponding LED.
+
+Let’s consider number 30
+
+| Operation       | Result | LED Status    |
+| --------------- | ------ | ------------- |
+| `30 & 1 == 1`   | false  | turn off LED1 |
+| `30 & 2 == 2`   | true   | turn on LED2  |
+| `30 & 4 == 4`   | true   | turn on LED3  |
+| `30 & 4 == 8`   | true   | turn on LED4  |
+| `30 & 16 == 16` | true   | turn on LED5  |
+
+This concept is commonly known as flagged enums.
+
+You can add more than just alphabets and numbers.
+
+Manually generating these arrays is hard. so I made not one but two apps for this.
+
+[The first one](https://pov-display-calc.vercel.app/) is written in [Preact](https://preactjs.com/) and it was specifically made for this project, it supports up to 5 LEDs.
+
+<p align="center">
+   <img src="./images/app-preact.png"/>
+</p>
+
+[The second one](https://po-v-display-calculator.vercel.app/) is written in [Angular](https://angular.io/) and it can support n number of LEDs,
+
+<p align="center">
+   <img src="./images/app-ng.png"/>
+</p>
+
+You can use these apps to generate code for other PoV projects as well
+
+Just generate arrays using these apps and add that code to the array in the sketch.
+
 ### Building PoV Display Circuit
 
 The PoV display Circuit is fairly simple.
@@ -211,22 +317,3 @@ like a mini motor or even fan
 (Don't forget to adjust the delay in code based on the angular velocity, this might take some trial and error).
 
 And that's it, now you have a PoV display, you will be able to see the letters on a moving object Have fun.
-
-You can add more than just alphabets and numbers, you can even use custom fonts.
-
-I've made two apps for this.
-[The first one](https://pov-display-calc.vercel.app/) is written in [Preact](https://preactjs.com/) and it was specifically made for this project, it supports up to 5 LEDs.
-
-<p align="center">
-   <img src="./images/app-preact.png"/>
-</p>
-
-[The second one](https://po-v-display-calculator.vercel.app/) is written in [Angular](https://angular.io/) and it can support n number of LEDs,
-
-<p align="center">
-   <img src="./images/app-ng.png"/>
-</p>
-
-You can use these apps to generate code for other PoV projects as well
-
-Just generate arrays using these apps and add that code to the array in the sketch.
