@@ -266,7 +266,7 @@ Let’s consider number 30
 | `30 & 4 == 8`   | true   | turn on LED4  |
 | `30 & 16 == 16` | true   | turn on LED5  |
 
-This concept is commonly known as flagged enums.
+This concept is commonly known as [flagged enums](https://stackoverflow.com/a/8480/4743730).
 
 You can add more than just alphabets and numbers.
 
