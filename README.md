@@ -35,8 +35,8 @@ If you are in India you can get the ATtiny Microcontroller from this [link](http
 
 -   1 x [ATtiny13](https://www.roboelements.com/product/attiny13-microcontroller-8-bit-atmel-avr-microcontroller/)
 -   5 x 3mm LEDs (5mm LED will also work, 3mm looks better as you can put them much closer in PCB)
--   1 x CR2012 Battery
--   1 x CR2012 Battery holder
+-   1 x CR2032 Battery
+-   1 x CR2032 Battery holder
 -   1 x Slide Switch
 -   Prototyping PCB or My Custom PCB
 -   Soldering Iron
